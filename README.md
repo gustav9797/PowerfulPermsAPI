@@ -1,5 +1,6 @@
 # PowerfulPerms API
 API for Spigot plugin PowerfulPerms
+This API works on both BungeeCord and Spigot.
 
 Example of how to use:
 ```

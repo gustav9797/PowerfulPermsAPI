@@ -1,4 +1,4 @@
-# PowerfulPermsAPI
+# PowerfulPerms API
 API for Spigot plugin PowerfulPerms
 
 Example of how to use:

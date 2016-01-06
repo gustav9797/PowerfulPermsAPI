@@ -2,7 +2,7 @@
 API for Spigot plugin PowerfulPerms
 
 Example of how to use:
-
+```
 PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");
 PermissionManager permissionManager = plugin.getPermissionManager();
 PermissionPlayer player = permissionManager.getPermissionsPlayer(e.getPlayer().getUniqueId());
@@ -38,3 +38,4 @@ for (Permission perm : player.getPermissions()) {
     output += perm.getPermissionString() + " - server:" + perm.getServer() + " - world:" + perm.getWorld() + ", ";
 }
 Bukkit.getLogger().info(output);
+```

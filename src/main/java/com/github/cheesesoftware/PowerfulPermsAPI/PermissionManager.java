@@ -83,6 +83,11 @@ public interface PermissionManager {
     public void getPlayerPrimaryGroup(String playerName, ResultRunnable<Group> resultRunnable);
 
     /**
+     * Retrieves the secondary group of the player with the specified name.
+     */
+    public void getPlayerSecondaryGroup(String playerName, ResultRunnable<Group> resultRunnable);
+
+    /**
      * Retrieves a map containing all the permissions of the player with the specified name.
      */
     public void getPlayerOwnPermissions(String playerName, ResultRunnable<List<Permission>> resultRunnable);
@@ -144,6 +149,8 @@ public interface PermissionManager {
     public void setPlayerSuffix(String playerName, String suffix, ResponseRunnable response);
 
     public void setPlayerPrimaryGroup(String playerName, String groupName, String server, ResponseRunnable response);
+
+    public void setPlayerSecondaryGroup(String playerName, String groupName, String server, ResponseRunnable response);
 
     public void removePlayerGroup(String playerName, String groupName, ResponseRunnable response);
 

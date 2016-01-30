@@ -10,6 +10,12 @@ public interface PermissionPlayer {
     public Group getPrimaryGroup(String server);
 
     public Group getPrimaryGroup();
+    
+    public HashMap<String, Group> getSecondaryGroups();
+    
+    public Group getSecondaryGroup(String server);
+    
+    public Group getSecondaryGroup();
 
     public HashMap<String, List<CachedGroup>> getCachedGroups();
     
@@ -38,4 +44,5 @@ public interface PermissionPlayer {
     public String getOwnPrefix();
     
     public String getOwnSuffix();
+
 }

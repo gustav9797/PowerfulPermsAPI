@@ -19,7 +19,11 @@ public interface PowerfulPermsPlugin {
     
     public boolean isPlayerOnline(UUID uuid);
     
+    public boolean isPlayerOnline(String name);
+    
     public UUID getPlayerUUID(String name);
+    
+    public String getPlayerName(UUID uuid);
     
     public void debug(String message);
     

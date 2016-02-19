@@ -7,6 +7,8 @@ import java.util.UUID;
 
 public interface PermissionManager {
 
+    // TODO: replace "with specified name"
+
     /**
      * If using Redis: Tells other servers to reload groups.
      */
@@ -18,9 +20,9 @@ public interface PermissionManager {
     public void notifyReloadPlayers();
 
     /**
-     * If using Redis: Tells other server to reload a player with the specified name.
+     * If using Redis: Tells other server to reload a player with the specified UUID.
      */
-    public void notifyReloadPlayer(String playerName);
+    public void notifyReloadPlayer(UUID uuid);
 
     /**
      * Reloads permission data for online players.
@@ -70,47 +72,47 @@ public interface PermissionManager {
     /**
      * Retrieves all groups of the player with the specified name.
      */
-    public void getPlayerGroups(String playerName, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
+    public void getPlayerGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
 
     /**
      * Retrieves a DBDocument with permission data of the player with the specified name.
      */
-    public void getPlayerData(String playerName, ResultRunnable<DBDocument> resultRunnable);
+    public void getPlayerData(UUID uuid, ResultRunnable<DBDocument> resultRunnable);
 
     /**
      * Retrieves the primary group of the player with the specified name.
      */
-    public void getPlayerPrimaryGroup(String playerName, ResultRunnable<Group> resultRunnable);
+    public void getPlayerPrimaryGroup(UUID uuid, ResultRunnable<Group> resultRunnable);
 
     /**
      * Retrieves the secondary group of the player with the specified name.
      */
-    public void getPlayerSecondaryGroup(String playerName, ResultRunnable<Group> resultRunnable);
+    public void getPlayerSecondaryGroup(UUID uuid, ResultRunnable<Group> resultRunnable);
 
     /**
      * Retrieves a map containing all the permissions of the player with the specified name.
      */
-    public void getPlayerOwnPermissions(String playerName, ResultRunnable<List<Permission>> resultRunnable);
+    public void getPlayerOwnPermissions(UUID uuid, ResultRunnable<List<Permission>> resultRunnable);
 
     /**
      * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix from database.
      */
-    public void getPlayerPrefix(String playerName, ResultRunnable<String> resultRunnable);
+    public void getPlayerPrefix(UUID uuid, ResultRunnable<String> resultRunnable);
 
     /**
      * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix from database.
      */
-    public void getPlayerSuffix(String playerName, ResultRunnable<String> resultRunnable);
+    public void getPlayerSuffix(UUID uuid, ResultRunnable<String> resultRunnable);
 
     /**
      * Retrieves the own prefix of the player with the specified name.
      */
-    public void getPlayerOwnPrefix(String playerName, ResultRunnable<String> resultRunnable);
+    public void getPlayerOwnPrefix(UUID uuid, ResultRunnable<String> resultRunnable);
 
     /**
      * Retrieves the own suffix of the player with the specified name.
      */
-    public void getPlayerOwnSuffix(String playerName, ResultRunnable<String> resultRunnable);
+    public void getPlayerOwnSuffix(UUID uuid, ResultRunnable<String> resultRunnable);
 
     /**
      * Retrieves the prefix of the group with the specified name on the specified server. Set server to an empty String or "all" for all servers.
@@ -132,37 +134,49 @@ public interface PermissionManager {
      */
     public HashMap<String, String> getGroupServerSuffix(String groupName);
 
+    /**
+     * Retrieves UUID from player name. If player is not online it uses Mojang API.
+     */
+    public void getConvertUUID(final String playerName, final ResultRunnable<UUID> resultRunnable);
+
+    /**
+     * Retrieves the scheduler used for sync and asynchronous operations, working on both BungeeCord and Spigot.
+     */
+    public IScheduler getScheduler();
+
     // Database accessing functions below
 
-    public void addPlayerPermission(String playerName, String permission, ResponseRunnable response);
+    public void createPlayer(String name, UUID uuid, ResponseRunnable response);
 
-    public void addPlayerPermission(String playerName, String permission, String world, String server, ResponseRunnable response);
+    public void addPlayerPermission(UUID uuid, String playerName, String permission, ResponseRunnable response);
 
-    public void removePlayerPermission(String playerName, String permission, ResponseRunnable response);
+    public void addPlayerPermission(UUID uuid, String playerName, String permission, String world, String server, ResponseRunnable response);
 
-    public void removePlayerPermission(String playerName, String permission, String world, String server, ResponseRunnable response);
+    public void removePlayerPermission(UUID uuid, String permission, ResponseRunnable response);
 
-    public void removePlayerPermissions(String playerName, ResponseRunnable response);
+    public void removePlayerPermission(UUID uuid, String permission, String world, String server, ResponseRunnable response);
 
-    public void setPlayerPrefix(String playerName, String prefix, ResponseRunnable response);
+    public void removePlayerPermissions(UUID uuid, ResponseRunnable response);
 
-    public void setPlayerSuffix(String playerName, String suffix, ResponseRunnable response);
+    public void setPlayerPrefix(UUID uuid, String prefix, ResponseRunnable response);
 
-    public void setPlayerPrimaryGroup(String playerName, String groupName, String server, ResponseRunnable response);
+    public void setPlayerSuffix(UUID uuid, String suffix, ResponseRunnable response);
 
-    public void setPlayerSecondaryGroup(String playerName, String groupName, String server, ResponseRunnable response);
+    public void setPlayerPrimaryGroup(UUID uuid, String groupName, String server, ResponseRunnable response);
 
-    public void removePlayerGroup(String playerName, String groupName, ResponseRunnable response);
+    public void setPlayerSecondaryGroup(UUID uuid, String groupName, String server, ResponseRunnable response);
 
-    public void removePlayerGroup(String playerName, String groupName, boolean negated, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, String groupName, ResponseRunnable response);
 
-    public void removePlayerGroup(String playerName, String groupName, String server, boolean negated, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
 
-    public void addPlayerGroup(String playerName, String groupName, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
 
-    public void addPlayerGroup(String playerName, String groupName, boolean negated, ResponseRunnable response);
+    public void addPlayerGroup(UUID uuid, String groupName, ResponseRunnable response);
 
-    public void addPlayerGroup(String playerName, String groupName, String server, boolean negated, ResponseRunnable response);
+    public void addPlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
+
+    public void addPlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
 
     public void createGroup(String name, ResponseRunnable response);
 

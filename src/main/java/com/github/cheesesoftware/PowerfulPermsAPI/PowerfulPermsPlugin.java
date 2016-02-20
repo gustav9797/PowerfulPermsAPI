@@ -15,7 +15,7 @@ public interface PowerfulPermsPlugin {
     
     public boolean isDebug();
     
-    public boolean isOnlineMode();
+    public ServerMode getServerMode();
     
     public boolean isPlayerOnline(UUID uuid);
     

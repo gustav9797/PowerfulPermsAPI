@@ -2,47 +2,34 @@ package com.github.cheesesoftware.PowerfulPermsAPI;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 public interface PermissionPlayer {
 
-    public HashMap<String, Group> getPrimaryGroups();
-    
-    public Group getPrimaryGroup(String server);
+    public Group getWeightedGroup(int which);
 
-    public Group getPrimaryGroup();
-    
-    public HashMap<String, Group> getSecondaryGroups();
-    
-    public Group getSecondaryGroup(String server);
-    
-    public Group getSecondaryGroup();
+    public HashMap<String, TreeMap<Integer, List<CachedGroup>>> getAllGroups();
 
-    public HashMap<String, List<CachedGroup>> getCachedGroups();
-    
-    public List<CachedGroup> getCachedGroups(String server);
-    
-    public List<Group> getGroups(String server);
-    
-    public List<Group> getGroups();
-    
+    public TreeMap<Integer, List<CachedGroup>> getCurrentGroups();
+
     public List<Permission> getPermissions();
-    
+
     public List<String> getPermissionsInEffect();
 
     public Boolean hasPermission(String permission);
 
     public boolean isPermissionSet(String permission);
-    
+
     public String getPrefix(String server);
-    
+
     public String getSuffix(String server);
 
     public String getPrefix();
 
     public String getSuffix();
-    
+
     public String getOwnPrefix();
-    
+
     public String getOwnSuffix();
 
 }

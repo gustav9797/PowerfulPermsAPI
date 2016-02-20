@@ -2,6 +2,7 @@ package com.github.cheesesoftware.PowerfulPermsAPI;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
 
 public interface Group {
 
@@ -10,6 +11,8 @@ public interface Group {
     public String getName();
 
     public List<Group> getParents();
+
+    public Queue<Group> getAllParents();
 
     public String getPrefix(String server);
 

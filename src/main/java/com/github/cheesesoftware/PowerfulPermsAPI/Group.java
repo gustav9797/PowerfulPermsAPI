@@ -15,15 +15,17 @@ public interface Group {
 
     public String getSuffix(String server);
 
-    public HashMap<String, String> getServerPrefix();
+    public HashMap<String, String> getPrefixes();
 
-    public HashMap<String, String> getServerSuffix();
+    public HashMap<String, String> getSuffixes();
 
     public List<Permission> getOwnPermissions();
 
     public List<Permission> getPermissions();
 
-    public String getRawOwnParents();
+    public String getLadder();
+
+    public int getRank();
 
     public void setParents(List<Group> parents);
 

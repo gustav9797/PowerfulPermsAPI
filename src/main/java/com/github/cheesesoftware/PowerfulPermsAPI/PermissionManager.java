@@ -38,6 +38,11 @@ public interface PermissionManager {
      * Reloads permission data for an online player with the specified UUID.
      */
     public void reloadPlayer(UUID uuid);
+    
+    /**
+     * Reloads data for default players.
+     */
+    public void reloadDefaultPlayers(boolean samethread);
 
     /**
      * Returns the PermissionPlayer instance for the player with the specified UUID. Player has to be online.
@@ -78,16 +83,6 @@ public interface PermissionManager {
      * Retrieves a DBDocument with permission data of the player with the specified name.
      */
     public void getPlayerData(UUID uuid, ResultRunnable<DBDocument> resultRunnable);
-
-    /**
-     * Retrieves the primary group of the player with the specified name.
-     */
-    public void getPlayerPrimaryGroup(UUID uuid, ResultRunnable<Group> resultRunnable);
-
-    /**
-     * Retrieves the secondary group of the player with the specified name.
-     */
-    public void getPlayerSecondaryGroup(UUID uuid, ResultRunnable<Group> resultRunnable);
 
     /**
      * Retrieves a map containing all the permissions of the player with the specified name.
@@ -162,10 +157,6 @@ public interface PermissionManager {
 
     public void setPlayerSuffix(UUID uuid, String suffix, ResponseRunnable response);
 
-    public void setPlayerPrimaryGroup(UUID uuid, String groupName, String server, ResponseRunnable response);
-
-    public void setPlayerSecondaryGroup(UUID uuid, String groupName, String server, ResponseRunnable response);
-
     public void removePlayerGroup(UUID uuid, String groupName, ResponseRunnable response);
 
     public void removePlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
@@ -178,7 +169,7 @@ public interface PermissionManager {
 
     public void addPlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
 
-    public void createGroup(String name, ResponseRunnable response);
+    public void createGroup(String name, String ladder, int rank, ResponseRunnable response);
 
     public void deleteGroup(String groupName, ResponseRunnable response);
 
@@ -203,5 +194,9 @@ public interface PermissionManager {
     public void setGroupSuffix(String groupName, String suffix, ResponseRunnable response);
 
     public void setGroupSuffix(String groupName, String suffix, String server, ResponseRunnable response);
+
+    public void setGroupLadder(String groupName, String ladder, ResponseRunnable response);
+
+    public void setGroupRank(String groupName, int rank, ResponseRunnable response);
 
 }

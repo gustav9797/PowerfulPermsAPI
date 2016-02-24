@@ -32,5 +32,7 @@ public interface PermissionPlayer {
     public String getOwnPrefix();
     
     public String getOwnSuffix();
+    
+    public boolean isDefault();
 
 }

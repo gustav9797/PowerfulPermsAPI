@@ -47,12 +47,12 @@ public interface PermissionManager {
     /**
      * Returns the PermissionPlayer instance for the player with the specified UUID. Player has to be online.
      */
-    public PermissionPlayer getPermissionsPlayer(UUID uuid);
+    public PermissionPlayer getPermissionPlayer(UUID uuid);
 
     /**
      * Returns the PermissionPlayer instance for the player with the specified name. Player has to be online.
      */
-    public PermissionPlayer getPermissionsPlayer(String name);
+    public PermissionPlayer getPermissionPlayer(String name);
 
     /**
      * Reloads permission data for groups and finally reloads online players.

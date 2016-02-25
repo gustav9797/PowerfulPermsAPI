@@ -38,7 +38,7 @@ public interface PermissionManager {
      * Reloads permission data for an online player with the specified UUID.
      */
     public void reloadPlayer(UUID uuid);
-    
+
     /**
      * Reloads data for default players.
      */
@@ -75,9 +75,14 @@ public interface PermissionManager {
     public Map<Integer, Group> getGroups();
 
     /**
-     * Retrieves all groups of the player with the specified name.
+     * Retrieves all groups of the player with the specified name as they are in the database.
      */
     public void getPlayerGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
+
+    /**
+     * Retrieves all current groups of the player with the specified name. If player does not have any groups it includes the groups of player [default].
+     */
+    public void getPlayerCurrentGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
 
     /**
      * Retrieves a DBDocument with permission data of the player with the specified name.
@@ -90,12 +95,12 @@ public interface PermissionManager {
     public void getPlayerOwnPermissions(UUID uuid, ResultRunnable<List<Permission>> resultRunnable);
 
     /**
-     * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix from database.
+     * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix.
      */
     public void getPlayerPrefix(UUID uuid, ResultRunnable<String> resultRunnable);
 
     /**
-     * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix from database.
+     * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix.
      */
     public void getPlayerSuffix(UUID uuid, ResultRunnable<String> resultRunnable);
 

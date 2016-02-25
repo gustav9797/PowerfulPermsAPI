@@ -173,6 +173,12 @@ public interface PermissionManager {
     public void addPlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
 
     public void addPlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
+    
+    public void setPlayerRank(UUID uuid, String groupName, ResponseRunnable response);
+    
+    public void promotePlayer(UUID uuid, String ladder, ResponseRunnable response);
+    
+    public void demotePlayer(UUID uuid, String ladder, ResponseRunnable response);
 
     public void createGroup(String name, String ladder, int rank, ResponseRunnable response);
 

@@ -21,9 +21,9 @@ public interface PermissionPlayer {
 
     public boolean isPermissionSet(String permission);
     
-    public String getPrefix(String server);
+    public String getPrefix(String ladder);
     
-    public String getSuffix(String server);
+    public String getSuffix(String ladder);
 
     public String getPrefix();
 

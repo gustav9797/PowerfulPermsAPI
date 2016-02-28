@@ -17,7 +17,7 @@ public abstract class ResultRunnable<T> implements Runnable {
         this.result = result;
     }
     
-    public boolean sameThread() {
+    public boolean isSameThread() {
         return this.sameThread;
     }
     

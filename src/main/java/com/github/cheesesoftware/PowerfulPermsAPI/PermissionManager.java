@@ -85,6 +85,11 @@ public interface PermissionManager {
     public void getPlayerCurrentGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
 
     /**
+     * Checks if player uses groups from player [default].
+     */
+    public void isPlayerDefault(UUID uuid, ResultRunnable<Boolean> resultRunnable);
+
+    /**
      * Retrieves a DBDocument with permission data of the player with the specified name.
      */
     public void getPlayerData(UUID uuid, ResultRunnable<DBDocument> resultRunnable);
@@ -173,11 +178,11 @@ public interface PermissionManager {
     public void addPlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
 
     public void addPlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
-    
+
     public void setPlayerRank(UUID uuid, String groupName, ResponseRunnable response);
-    
+
     public void promotePlayer(UUID uuid, String ladder, ResponseRunnable response);
-    
+
     public void demotePlayer(UUID uuid, String ladder, ResponseRunnable response);
 
     public void createGroup(String name, String ladder, int rank, ResponseRunnable response);

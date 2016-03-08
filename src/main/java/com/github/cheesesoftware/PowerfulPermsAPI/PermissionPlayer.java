@@ -5,18 +5,6 @@ import java.util.List;
 
 public interface PermissionPlayer {
 
-    public HashMap<String, Group> getPrimaryGroups();
-    
-    public Group getPrimaryGroup(String server);
-
-    public Group getPrimaryGroup();
-    
-    public HashMap<String, Group> getSecondaryGroups();
-    
-    public Group getSecondaryGroup(String server);
-    
-    public Group getSecondaryGroup();
-
     public HashMap<String, List<CachedGroup>> getCachedGroups();
     
     public List<CachedGroup> getCachedGroups(String server);
@@ -33,9 +21,9 @@ public interface PermissionPlayer {
 
     public boolean isPermissionSet(String permission);
     
-    public String getPrefix(String server);
+    public String getPrefix(String ladder);
     
-    public String getSuffix(String server);
+    public String getSuffix(String ladder);
 
     public String getPrefix();
 
@@ -44,5 +32,7 @@ public interface PermissionPlayer {
     public String getOwnPrefix();
     
     public String getOwnSuffix();
+    
+    public boolean isDefault();
 
 }

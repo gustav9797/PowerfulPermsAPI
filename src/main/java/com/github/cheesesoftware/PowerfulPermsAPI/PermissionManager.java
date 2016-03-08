@@ -40,14 +40,19 @@ public interface PermissionManager {
     public void reloadPlayer(UUID uuid);
 
     /**
+     * Reloads data for default players.
+     */
+    public void reloadDefaultPlayers(boolean samethread);
+
+    /**
      * Returns the PermissionPlayer instance for the player with the specified UUID. Player has to be online.
      */
-    public PermissionPlayer getPermissionsPlayer(UUID uuid);
+    public PermissionPlayer getPermissionPlayer(UUID uuid);
 
     /**
      * Returns the PermissionPlayer instance for the player with the specified name. Player has to be online.
      */
-    public PermissionPlayer getPermissionsPlayer(String name);
+    public PermissionPlayer getPermissionPlayer(String name);
 
     /**
      * Reloads permission data for groups and finally reloads online players.
@@ -70,9 +75,19 @@ public interface PermissionManager {
     public Map<Integer, Group> getGroups();
 
     /**
-     * Retrieves all groups of the player with the specified name.
+     * Retrieves all groups of the player with the specified name as they are in the database.
      */
     public void getPlayerGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
+
+    /**
+     * Retrieves all current groups of the player with the specified name. If player does not have any groups it includes the groups of player [default].
+     */
+    public void getPlayerCurrentGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
+
+    /**
+     * Checks if player uses groups from player [default].
+     */
+    public void isPlayerDefault(UUID uuid, ResultRunnable<Boolean> resultRunnable);
 
     /**
      * Retrieves a DBDocument with permission data of the player with the specified name.
@@ -80,27 +95,17 @@ public interface PermissionManager {
     public void getPlayerData(UUID uuid, ResultRunnable<DBDocument> resultRunnable);
 
     /**
-     * Retrieves the primary group of the player with the specified name.
-     */
-    public void getPlayerPrimaryGroup(UUID uuid, ResultRunnable<Group> resultRunnable);
-
-    /**
-     * Retrieves the secondary group of the player with the specified name.
-     */
-    public void getPlayerSecondaryGroup(UUID uuid, ResultRunnable<Group> resultRunnable);
-
-    /**
      * Retrieves a map containing all the permissions of the player with the specified name.
      */
     public void getPlayerOwnPermissions(UUID uuid, ResultRunnable<List<Permission>> resultRunnable);
 
     /**
-     * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix from database.
+     * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix.
      */
     public void getPlayerPrefix(UUID uuid, ResultRunnable<String> resultRunnable);
 
     /**
-     * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix from database.
+     * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix.
      */
     public void getPlayerSuffix(UUID uuid, ResultRunnable<String> resultRunnable);
 
@@ -162,10 +167,6 @@ public interface PermissionManager {
 
     public void setPlayerSuffix(UUID uuid, String suffix, ResponseRunnable response);
 
-    public void setPlayerPrimaryGroup(UUID uuid, String groupName, String server, ResponseRunnable response);
-
-    public void setPlayerSecondaryGroup(UUID uuid, String groupName, String server, ResponseRunnable response);
-
     public void removePlayerGroup(UUID uuid, String groupName, ResponseRunnable response);
 
     public void removePlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
@@ -178,7 +179,13 @@ public interface PermissionManager {
 
     public void addPlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
 
-    public void createGroup(String name, ResponseRunnable response);
+    public void setPlayerRank(UUID uuid, String groupName, ResponseRunnable response);
+
+    public void promotePlayer(UUID uuid, String ladder, ResponseRunnable response);
+
+    public void demotePlayer(UUID uuid, String ladder, ResponseRunnable response);
+
+    public void createGroup(String name, String ladder, int rank, ResponseRunnable response);
 
     public void deleteGroup(String groupName, ResponseRunnable response);
 
@@ -203,5 +210,9 @@ public interface PermissionManager {
     public void setGroupSuffix(String groupName, String suffix, ResponseRunnable response);
 
     public void setGroupSuffix(String groupName, String suffix, String server, ResponseRunnable response);
+
+    public void setGroupLadder(String groupName, String ladder, ResponseRunnable response);
+
+    public void setGroupRank(String groupName, int rank, ResponseRunnable response);
 
 }

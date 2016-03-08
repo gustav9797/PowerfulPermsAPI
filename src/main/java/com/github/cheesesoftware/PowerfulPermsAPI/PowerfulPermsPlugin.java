@@ -28,4 +28,6 @@ public interface PowerfulPermsPlugin {
     public void debug(String message);
     
     public int getOldVersion();
+    
+    public String getVersion();
 }

@@ -6,37 +6,43 @@ Example of how to use:
 ```
 PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");
 PermissionManager permissionManager = plugin.getPermissionManager();
-PermissionPlayer player = permissionManager.getPermissionsPlayer(e.getPlayer().getUniqueId());
-Bukkit.getLogger().info("Player prefix: " + player.getPrefix());
-Bukkit.getLogger().info("Player own prefix: " + player.getOwnPrefix());
-Bukkit.getLogger().info("Player suffix: " + player.getSuffix());
-Bukkit.getLogger().info("Player own suffix: " + player.getOwnSuffix());
-Bukkit.getLogger().info("Player primary group: " + player.getPrimaryGroup().getName());
 
-String output = "Current groups: ";
-for (Group group : player.getGroups()) {
-    output += group.getName() + ", ";
-}
-Bukkit.getLogger().info(output);
+// Add permission to player
+// Both UUID and name is required because that's how the table is.
+permissionManager.addPlayerPermission(uuid, playerName, "some.permission", new ResponseRunnable() {
 
-output = "All groups: ";
-for (Map.Entry<String, List<CachedGroup>> entry : player.getCachedGroups().entrySet()) {
-    output += "On server " + entry.getKey() + ": ";
-    for (CachedGroup group : entry.getValue()) {
-        output += group.getGroup().getName() + " - primary:" + group.isPrimary() + " - negated:" + group.isNegated() + ", ";
+    @Override
+    public void run() {
+        // This function is run synchronously when the action is finished.
+        // There is a boolean to tell you if the action succeeded or not, there is also a string response.
+        boolean result = success;
+        if (!result)
+            Bukkit.getLogger().log(Level.SEVERE, "Could not add player permission. " + response);
     }
-}
-Bukkit.getLogger().info(output);
+});
 
-output = "Current permissions: ";
-for (String perm : player.getPermissionsInEffect()) {
-    output += perm + ", ";
-}
-Bukkit.getLogger().info(output);
+// Get prefix of an online/offline player.
+// This time you will use a ResultRunnable with template for the returned data.
+permissionManager.getPlayerPrefix(uuid, new ResultRunnable<String>() {
 
-output = "All permissions: ";
-for (Permission perm : player.getPermissions()) {
-    output += perm.getPermissionString() + " - server:" + perm.getServer() + " - world:" + perm.getWorld() + ", ";
-}
-Bukkit.getLogger().info(output);
-```
+    @Override
+    public void run() {
+        // This function is run synchronously when the action is finished.
+        // The prefix is in the variable called "result"
+        String prefix = result;
+    }
+});
+
+// Get an online player.
+// Will be null if the player isn't online.
+// This is simpler to use since there are no callbacks involved.
+PermissionPlayer permissionPlayer = permissionManager.getPermissionPlayer(uuid);
+
+// Get the prefix for a specific ladder from the online player.
+String staffPrefix = permissionPlayer.getPrefix("staff");
+
+// Get the prefix for the default ladder, if the player has his own prefix set it returns that instead.
+String prefix = permissionPlayer.getPrefix();
+
+// Get the player's own prefix.
+String ownPrefix = permissionPlayer.getOwnPrefix();     

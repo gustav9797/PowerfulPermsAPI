@@ -27,6 +27,6 @@ public interface Group {
 
     public int getRank();
 
-    public void setParents(List<Group> parents);
+    public void setParents(List<Integer> parents);
 
 }

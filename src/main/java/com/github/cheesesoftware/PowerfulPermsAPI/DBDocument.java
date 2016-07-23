@@ -20,9 +20,13 @@ public class DBDocument {
 
     public int getInt(String key) {
         Object input = data.get(key);
-        if(input instanceof Long) {
-            return ((Long)input).intValue();
+        if (input instanceof Long) {
+            return ((Long) input).intValue();
         }
         return (Integer) input;
+    }
+
+    public boolean getBoolean(String key) {
+        return (Boolean) data.get(key);
     }
 }

@@ -18,6 +18,10 @@ public abstract class ResponseRunnable implements Runnable {
         this.success = success;
         this.response = response;
     }
+    
+    public String getResponse() {
+        return this.response;
+    }
 
     public boolean isSameThread() {
         return this.sameThread;

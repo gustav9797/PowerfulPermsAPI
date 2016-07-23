@@ -1,11 +1,11 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface PermissionPlayer {
 
-    public HashMap<String, List<CachedGroup>> getCachedGroups();
+    public LinkedHashMap<String, List<CachedGroup>> getCachedGroups();
     
     public List<CachedGroup> getCachedGroups(String server);
     

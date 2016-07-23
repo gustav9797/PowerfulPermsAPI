@@ -1,6 +1,7 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -77,18 +78,18 @@ public interface PermissionManager {
     /**
      * Retrieves all groups of the player with the specified name as they are in the database.
      */
-    public void getPlayerGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
+    public void getPlayerOwnGroups(UUID uuid, ResultRunnable<LinkedHashMap<String, List<CachedGroup>>> resultRunnable);
 
     /**
      * Retrieves all current groups of the player with the specified name. If player does not have any groups it includes the groups of player [default].
      */
-    public void getPlayerCurrentGroups(UUID uuid, ResultRunnable<Map<String, List<CachedGroup>>> resultRunnable);
+    public void getPlayerCurrentGroups(UUID uuid, ResultRunnable<LinkedHashMap<String, List<CachedGroup>>> resultRunnable);
 
     /**
      * Checks if player uses groups from player [default].
      */
     public void isPlayerDefault(UUID uuid, ResultRunnable<Boolean> resultRunnable);
-
+    
     /**
      * Retrieves a DBDocument with permission data of the player with the specified name.
      */
@@ -122,22 +123,22 @@ public interface PermissionManager {
     /**
      * Retrieves the prefix of the group with the specified name on the specified server. Set server to an empty String or "all" for all servers.
      */
-    public String getGroupPrefix(String groupName, String server);
+    public String getGroupPrefix(int groupId, String server);
 
     /**
      * Retrieves the suffix of the group with the specified name on the specified server. Set server to an empty String or "all" for all servers.
      */
-    public String getGroupSuffix(String groupName, String server);
+    public String getGroupSuffix(int groupId, String server);
 
     /**
      * Retrieves the prefixes of the group with the specified name. The map is indexed by server name.
      */
-    public HashMap<String, String> getGroupServerPrefix(String groupName);
+    public HashMap<String, String> getGroupServerPrefix(int groupId);
 
     /**
      * Retrieves the suffixes of the group with the specified name. The map is indexed by server name.
      */
-    public HashMap<String, String> getGroupServerSuffix(String groupName);
+    public HashMap<String, String> getGroupServerSuffix(int groupId);
 
     /**
      * Retrieves UUID from player name. If player is not online it uses Mojang API.
@@ -167,19 +168,19 @@ public interface PermissionManager {
 
     public void setPlayerSuffix(UUID uuid, String suffix, ResponseRunnable response);
 
-    public void removePlayerGroup(UUID uuid, String groupName, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, int groupId, ResponseRunnable response);
 
-    public void removePlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, int groupId, boolean negated, ResponseRunnable response);
 
-    public void removePlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, int groupId, String server, boolean negated, ResponseRunnable response);
 
-    public void addPlayerGroup(UUID uuid, String groupName, ResponseRunnable response);
+    public void addPlayerGroup(UUID uuid, int groupId, ResponseRunnable response);
 
-    public void addPlayerGroup(UUID uuid, String groupName, boolean negated, ResponseRunnable response);
+    public void addPlayerGroup(UUID uuid, int groupId, boolean negated, ResponseRunnable response);
 
-    public void addPlayerGroup(UUID uuid, String groupName, String server, boolean negated, ResponseRunnable response);
+    public void addPlayerGroup(UUID uuid, int groupId, String server, boolean negated, ResponseRunnable response);
 
-    public void setPlayerRank(UUID uuid, String groupName, ResponseRunnable response);
+    public void setPlayerRank(UUID uuid, int groupId, ResponseRunnable response);
 
     public void promotePlayer(UUID uuid, String ladder, ResponseRunnable response);
 
@@ -187,32 +188,32 @@ public interface PermissionManager {
 
     public void createGroup(String name, String ladder, int rank, ResponseRunnable response);
 
-    public void deleteGroup(String groupName, ResponseRunnable response);
+    public void deleteGroup(int groupId, ResponseRunnable response);
 
-    public void addGroupPermission(String groupName, String permission, ResponseRunnable response);
+    public void addGroupPermission(int groupId, String permission, ResponseRunnable response);
 
-    public void addGroupPermission(String groupName, String permission, String world, String server, ResponseRunnable response);
+    public void addGroupPermission(int groupId, String permission, String world, String server, ResponseRunnable response);
 
-    public void removeGroupPermission(String groupName, String permission, ResponseRunnable response);
+    public void removeGroupPermission(int groupId, String permission, ResponseRunnable response);
 
-    public void removeGroupPermission(String groupName, String permission, String world, String server, ResponseRunnable response);
+    public void removeGroupPermission(int groupId, String permission, String world, String server, ResponseRunnable response);
 
-    public void removeGroupPermissions(String groupName, ResponseRunnable response);
+    public void removeGroupPermissions(int groupId, ResponseRunnable response);
 
-    public void addGroupParent(String groupName, String parentGroupName, ResponseRunnable response);
+    public void addGroupParent(int groupId, int parentGroupId, ResponseRunnable response);
 
-    public void removeGroupParent(String groupName, String parentGroupName, ResponseRunnable response);
+    public void removeGroupParent(int groupId, int parentGroupId, ResponseRunnable response);
 
-    public void setGroupPrefix(String groupName, String prefix, ResponseRunnable response);
+    public void setGroupPrefix(int groupId, String prefix, ResponseRunnable response);
 
-    public void setGroupPrefix(String groupName, String prefix, String server, ResponseRunnable response);
+    public void setGroupPrefix(int groupId, String prefix, String server, ResponseRunnable response);
 
-    public void setGroupSuffix(String groupName, String suffix, ResponseRunnable response);
+    public void setGroupSuffix(int groupId, String suffix, ResponseRunnable response);
 
-    public void setGroupSuffix(String groupName, String suffix, String server, ResponseRunnable response);
+    public void setGroupSuffix(int groupId, String suffix, String server, ResponseRunnable response);
 
-    public void setGroupLadder(String groupName, String ladder, ResponseRunnable response);
+    public void setGroupLadder(int groupId, String ladder, ResponseRunnable response);
 
-    public void setGroupRank(String groupName, int rank, ResponseRunnable response);
+    public void setGroupRank(int groupId, int rank, ResponseRunnable response);
 
 }

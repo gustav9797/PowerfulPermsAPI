@@ -1,6 +1,13 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
+import java.util.Date;
+
 public interface Permission {
+
+    /**
+     * Returns the ID of this permission as it is stored in the database.
+     */
+    public int getId();
 
     /**
      * Returns the permission string.
@@ -16,5 +23,12 @@ public interface Permission {
      * Returns the name of the server the permission applies to. If empty or "all", applies to all servers.
      */
     public String getServer();
+
+    /**
+     * Returns the date when this permission expires. If no expiration date, it is null.
+     */
+    public Date getExpirationDate();
+
+    public boolean willExpire();
 
 }

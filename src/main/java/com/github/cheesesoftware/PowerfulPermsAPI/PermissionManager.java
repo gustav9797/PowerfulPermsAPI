@@ -1,5 +1,6 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -156,11 +157,11 @@ public interface PermissionManager {
 
     public void addPlayerPermission(UUID uuid, String playerName, String permission, ResponseRunnable response);
 
-    public void addPlayerPermission(UUID uuid, String playerName, String permission, String world, String server, ResponseRunnable response);
+    public void addPlayerPermission(UUID uuid, String playerName, String permission, String world, String server, final Date expires, ResponseRunnable response);
 
     public void removePlayerPermission(UUID uuid, String permission, ResponseRunnable response);
 
-    public void removePlayerPermission(UUID uuid, String permission, String world, String server, ResponseRunnable response);
+    public void removePlayerPermission(UUID uuid, String permission, String world, String server, final Date expires, ResponseRunnable response);
 
     public void removePlayerPermissions(UUID uuid, ResponseRunnable response);
 
@@ -172,13 +173,13 @@ public interface PermissionManager {
 
     public void removePlayerGroup(UUID uuid, int groupId, boolean negated, ResponseRunnable response);
 
-    public void removePlayerGroup(UUID uuid, int groupId, String server, boolean negated, ResponseRunnable response);
+    public void removePlayerGroup(UUID uuid, int groupId, String server, boolean negated, final Date expires, ResponseRunnable response);
 
     public void addPlayerGroup(UUID uuid, int groupId, ResponseRunnable response);
 
     public void addPlayerGroup(UUID uuid, int groupId, boolean negated, ResponseRunnable response);
 
-    public void addPlayerGroup(UUID uuid, int groupId, String server, boolean negated, ResponseRunnable response);
+    public void addPlayerGroup(UUID uuid, int groupId, String server, boolean negated, final Date expires, ResponseRunnable response);
 
     public void setPlayerRank(UUID uuid, int groupId, ResponseRunnable response);
 
@@ -192,11 +193,11 @@ public interface PermissionManager {
 
     public void addGroupPermission(int groupId, String permission, ResponseRunnable response);
 
-    public void addGroupPermission(int groupId, String permission, String world, String server, ResponseRunnable response);
+    public void addGroupPermission(int groupId, String permission, String world, String server, final Date expires, ResponseRunnable response);
 
     public void removeGroupPermission(int groupId, String permission, ResponseRunnable response);
 
-    public void removeGroupPermission(int groupId, String permission, String world, String server, ResponseRunnable response);
+    public void removeGroupPermission(int groupId, String permission, String world, String server, final Date expires, ResponseRunnable response);
 
     public void removeGroupPermissions(int groupId, ResponseRunnable response);
 

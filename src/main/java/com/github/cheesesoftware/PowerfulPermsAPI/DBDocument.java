@@ -1,5 +1,8 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 public class DBDocument {
@@ -28,5 +31,18 @@ public class DBDocument {
 
     public boolean getBoolean(String key) {
         return (Boolean) data.get(key);
+    }
+
+    public Timestamp getTimeStamp(String key) {
+        return (Timestamp) data.get(key);
+    }
+
+    public Date getDate(String key) {
+        if (getTimeStamp(key) != null) {
+            Calendar start = Calendar.getInstance();
+            start.setTimeInMillis(getTimeStamp(key).getTime());
+            return start.getTime();
+        }
+        return null;
     }
 }

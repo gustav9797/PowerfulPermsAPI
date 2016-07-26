@@ -1,5 +1,7 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
+import java.util.Date;
+
 public interface IScheduler {
     public void runAsync(Runnable runnable, boolean sameThread);
 
@@ -14,6 +16,10 @@ public interface IScheduler {
     public void runSync(Runnable runnable);
 
     public int runRepeating(Runnable runnable, int seconds);
-    
+
     public void stopRepeating(int taskId);
+
+    public int runDelayed(Runnable runnable, Date when);
+
+    public int runDelayed(Runnable runnable, long seconds);
 }

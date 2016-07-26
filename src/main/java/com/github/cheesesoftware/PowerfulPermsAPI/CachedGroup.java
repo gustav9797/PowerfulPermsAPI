@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class CachedGroup {
     private int id;
-    private Group group;
+    private int groupId;
     private boolean negated;
     private Date expires;
+    private int expireTaskId = -1;
 
-    public CachedGroup(int id, Group group, boolean negated, Date expires) {
+    public CachedGroup(int id, int groupId, boolean negated, Date expires) {
         this.id = id;
-        this.group = group;
+        this.groupId = groupId;
         this.negated = negated;
         this.expires = expires;
     }
@@ -19,8 +20,8 @@ public class CachedGroup {
         return this.id;
     }
 
-    public Group getGroup() {
-        return this.group;
+    public int getGroupId() {
+        return this.groupId;
     }
 
     public boolean isNegated() {
@@ -35,10 +36,22 @@ public class CachedGroup {
         return expires != null;
     }
 
+    public boolean hasExpired() {
+        return willExpire() && getExpirationDate().before(new Date());
+    }
+
+    public int getExpireTaskId() {
+        return expireTaskId;
+    }
+
+    public void setExpireTaskId(int taskId) {
+        this.expireTaskId = taskId;
+    }
+
     public static boolean isSimilar(CachedGroup group, int groupId, boolean negated, Date expires) {
         if (group == null)
             return false;
-        if (group.getGroup().getId() == groupId) {
+        if (group.getGroupId() == groupId) {
             if (group.isNegated() == negated) {
                 if (group.getExpirationDate() == null && expires == null)
                     return true;

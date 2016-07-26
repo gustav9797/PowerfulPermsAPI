@@ -29,6 +29,14 @@ public interface Permission {
      */
     public Date getExpirationDate();
 
+    /*
+     * Returns true if this is a timed permission.
+     */
     public boolean willExpire();
+
+    /*
+     * Returns true if this is a timed permission and has expired.
+     */
+    public boolean hasExpired();
 
 }

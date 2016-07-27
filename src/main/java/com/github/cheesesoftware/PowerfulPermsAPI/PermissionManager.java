@@ -11,6 +11,11 @@ public interface PermissionManager {
 
     // TODO: replace "with specified name"
 
+    /*
+     * Returns the event handler.
+     */
+    public EventHandler getEventHandler();
+    
     /**
      * If using Redis: Tells other servers to reload groups.
      */

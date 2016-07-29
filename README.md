@@ -2,6 +2,7 @@
 API for Spigot plugin PowerfulPerms.
 This API works on both BungeeCord and Spigot.
 
+```
 <repositories>
 	<repository>
 		<id>alskebo-repo</id>
@@ -16,6 +17,7 @@ This API works on both BungeeCord and Spigot.
 		<version>X.X.X</version>
 	</dependency>
 </dependencies>
+```
 
 Example of how to use:
 ```
@@ -61,3 +63,4 @@ String prefix = permissionPlayer.getPrefix();
 
 // Get the player's own prefix.
 String ownPrefix = permissionPlayer.getOwnPrefix();     
+```

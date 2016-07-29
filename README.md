@@ -2,6 +2,21 @@
 API for Spigot plugin PowerfulPerms.
 This API works on both BungeeCord and Spigot.
 
+<repositories>
+	<repository>
+		<id>alskebo-repo</id>
+		<url>http://repo.alskebo.com/repository/maven-releases</url>
+	</repository>
+</repositories>
+
+<dependencies>
+	<dependency>
+		<groupId>com.github.cheesesoftware</groupId>
+		<artifactId>PowerfulPermsAPI</artifactId>
+		<version>X.X.X</version>
+	</dependency>
+</dependencies>
+
 Example of how to use:
 ```
 PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");

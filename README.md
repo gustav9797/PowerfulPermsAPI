@@ -2,7 +2,7 @@
 API for Spigot plugin PowerfulPerms.
 This API works on both BungeeCord and Spigot.
 
-```
+```xml
 <repositories>
 	<repository>
 		<id>alskebo-repo</id>
@@ -20,7 +20,7 @@ This API works on both BungeeCord and Spigot.
 ```
 
 Example of how to use:
-```
+```java
 PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");
 PermissionManager permissionManager = plugin.getPermissionManager();
 

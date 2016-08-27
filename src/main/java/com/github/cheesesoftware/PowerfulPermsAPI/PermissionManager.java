@@ -221,5 +221,7 @@ public interface PermissionManager {
     public void setGroupLadder(int groupId, String ladder, ResponseRunnable response);
 
     public void setGroupRank(int groupId, int rank, ResponseRunnable response);
+    
+    public void setGroupName(int groupId, String name, ResponseRunnable response);
 
 }

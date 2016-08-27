@@ -160,9 +160,9 @@ public interface PermissionManager {
 
     public void createPlayer(String name, UUID uuid, ResponseRunnable response);
 
-    public void addPlayerPermission(UUID uuid, String playerName, String permission, ResponseRunnable response);
+    public void addPlayerPermission(UUID uuid, String permission, ResponseRunnable response);
 
-    public void addPlayerPermission(UUID uuid, String playerName, String permission, String world, String server, final Date expires, ResponseRunnable response);
+    public void addPlayerPermission(UUID uuid, String permission, String world, String server, final Date expires, ResponseRunnable response);
 
     public void removePlayerPermission(UUID uuid, String permission, ResponseRunnable response);
 

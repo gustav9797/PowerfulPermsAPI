@@ -6,16 +6,24 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+
+import com.google.common.util.concurrent.ListenableFuture;
 
 public interface PermissionManager {
 
     // TODO: replace "with specified name"
 
     /*
+     * Returns the executor service.
+     */
+    public ExecutorService getExecutor();
+    
+    /*
      * Returns the event handler.
      */
     public EventHandler getEventHandler();
-    
+
     /**
      * If using Redis: Tells other servers to reload groups.
      */
@@ -84,47 +92,47 @@ public interface PermissionManager {
     /**
      * Retrieves all groups of the player with the specified name as they are in the database.
      */
-    public void getPlayerOwnGroups(UUID uuid, ResultRunnable<LinkedHashMap<String, List<CachedGroup>>> resultRunnable);
+    public ListenableFuture<LinkedHashMap<String, List<CachedGroup>>> getPlayerOwnGroups(UUID uuid);
 
     /**
      * Retrieves all current groups of the player with the specified name. If player does not have any groups it includes the groups of player [default].
      */
-    public void getPlayerCurrentGroups(UUID uuid, ResultRunnable<LinkedHashMap<String, List<CachedGroup>>> resultRunnable);
+    public ListenableFuture<LinkedHashMap<String, List<CachedGroup>>> getPlayerCurrentGroups(UUID uuid);
 
     /**
      * Checks if player uses groups from player [default].
      */
-    public void isPlayerDefault(UUID uuid, ResultRunnable<Boolean> resultRunnable);
-    
+    public ListenableFuture<Boolean> isPlayerDefault(UUID uuid);
+
     /**
      * Retrieves a DBDocument with permission data of the player with the specified name.
      */
-    public void getPlayerData(UUID uuid, ResultRunnable<DBDocument> resultRunnable);
+    public ListenableFuture<DBDocument> getPlayerData(UUID uuid);
 
     /**
      * Retrieves a map containing all the permissions of the player with the specified name.
      */
-    public void getPlayerOwnPermissions(UUID uuid, ResultRunnable<List<Permission>> resultRunnable);
+    public ListenableFuture<List<Permission>> getPlayerOwnPermissions(UUID uuid);
 
     /**
      * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix.
      */
-    public void getPlayerPrefix(UUID uuid, ResultRunnable<String> resultRunnable);
+    public ListenableFuture<String> getPlayerPrefix(UUID uuid);
 
     /**
      * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix.
      */
-    public void getPlayerSuffix(UUID uuid, ResultRunnable<String> resultRunnable);
+    public ListenableFuture<String> getPlayerSuffix(UUID uuid);
 
     /**
      * Retrieves the own prefix of the player with the specified name.
      */
-    public void getPlayerOwnPrefix(UUID uuid, ResultRunnable<String> resultRunnable);
+    public ListenableFuture<String> getPlayerOwnPrefix(UUID uuid);
 
     /**
      * Retrieves the own suffix of the player with the specified name.
      */
-    public void getPlayerOwnSuffix(UUID uuid, ResultRunnable<String> resultRunnable);
+    public ListenableFuture<String> getPlayerOwnSuffix(UUID uuid);
 
     /**
      * Retrieves the prefix of the group with the specified name on the specified server. Set server to an empty String or "all" for all servers.
@@ -149,7 +157,7 @@ public interface PermissionManager {
     /**
      * Retrieves UUID from player name. If player is not online it uses Mojang API.
      */
-    public void getConvertUUID(final String playerName, final ResultRunnable<UUID> resultRunnable);
+    public ListenableFuture<UUID> getConvertUUID(final String playerName);
 
     /**
      * Retrieves the scheduler used for sync and asynchronous operations, working on both BungeeCord and Spigot.
@@ -158,70 +166,70 @@ public interface PermissionManager {
 
     // Database accessing functions below
 
-    public void createPlayer(String name, UUID uuid, ResponseRunnable response);
+    public ListenableFuture<Response> createPlayer(String name, UUID uuid);
 
-    public void addPlayerPermission(UUID uuid, String permission, ResponseRunnable response);
+    public ListenableFuture<Response> addPlayerPermission(UUID uuid, String permission);
 
-    public void addPlayerPermission(UUID uuid, String permission, String world, String server, final Date expires, ResponseRunnable response);
+    public ListenableFuture<Response> addPlayerPermission(UUID uuid, String permission, String world, String server, final Date expires);
 
-    public void removePlayerPermission(UUID uuid, String permission, ResponseRunnable response);
+    public ListenableFuture<Response> removePlayerPermission(UUID uuid, String permission);
 
-    public void removePlayerPermission(UUID uuid, String permission, String world, String server, final Date expires, ResponseRunnable response);
+    public ListenableFuture<Response> removePlayerPermission(UUID uuid, String permission, String world, String server, final Date expires);
 
-    public void removePlayerPermissions(UUID uuid, ResponseRunnable response);
+    public ListenableFuture<Response> removePlayerPermissions(UUID uuid);
 
-    public void setPlayerPrefix(UUID uuid, String prefix, ResponseRunnable response);
+    public ListenableFuture<Response> setPlayerPrefix(UUID uuid, String prefix);
 
-    public void setPlayerSuffix(UUID uuid, String suffix, ResponseRunnable response);
+    public ListenableFuture<Response> setPlayerSuffix(UUID uuid, String suffix);
 
-    public void removePlayerGroup(UUID uuid, int groupId, ResponseRunnable response);
+    public ListenableFuture<Response> removePlayerGroup(UUID uuid, int groupId);
 
-    public void removePlayerGroup(UUID uuid, int groupId, boolean negated, ResponseRunnable response);
+    public ListenableFuture<Response> removePlayerGroup(UUID uuid, int groupId, boolean negated);
 
-    public void removePlayerGroup(UUID uuid, int groupId, String server, boolean negated, final Date expires, ResponseRunnable response);
+    public ListenableFuture<Response> removePlayerGroup(UUID uuid, int groupId, String server, boolean negated, final Date expires);
 
-    public void addPlayerGroup(UUID uuid, int groupId, ResponseRunnable response);
+    public ListenableFuture<Response> addPlayerGroup(UUID uuid, int groupId);
 
-    public void addPlayerGroup(UUID uuid, int groupId, boolean negated, ResponseRunnable response);
+    public ListenableFuture<Response> addPlayerGroup(UUID uuid, int groupId, boolean negated);
 
-    public void addPlayerGroup(UUID uuid, int groupId, String server, boolean negated, final Date expires, ResponseRunnable response);
+    public ListenableFuture<Response> addPlayerGroup(UUID uuid, int groupId, String server, boolean negated, final Date expires);
 
-    public void setPlayerRank(UUID uuid, int groupId, ResponseRunnable response);
+    public ListenableFuture<Response> setPlayerRank(UUID uuid, int groupId);
 
-    public void promotePlayer(UUID uuid, String ladder, ResponseRunnable response);
+    public ListenableFuture<Response> promotePlayer(UUID uuid, String ladder);
 
-    public void demotePlayer(UUID uuid, String ladder, ResponseRunnable response);
+    public ListenableFuture<Response> demotePlayer(UUID uuid, String ladder);
 
-    public void createGroup(String name, String ladder, int rank, ResponseRunnable response);
+    public ListenableFuture<Response> createGroup(String name, String ladder, int rank);
 
-    public void deleteGroup(int groupId, ResponseRunnable response);
+    public ListenableFuture<Response> deleteGroup(int groupId);
 
-    public void addGroupPermission(int groupId, String permission, ResponseRunnable response);
+    public ListenableFuture<Response> addGroupPermission(int groupId, String permission);
 
-    public void addGroupPermission(int groupId, String permission, String world, String server, final Date expires, ResponseRunnable response);
+    public ListenableFuture<Response> addGroupPermission(int groupId, String permission, String world, String server, final Date expires);
 
-    public void removeGroupPermission(int groupId, String permission, ResponseRunnable response);
+    public ListenableFuture<Response> removeGroupPermission(int groupId, String permission);
 
-    public void removeGroupPermission(int groupId, String permission, String world, String server, final Date expires, ResponseRunnable response);
+    public ListenableFuture<Response> removeGroupPermission(int groupId, String permission, String world, String server, final Date expires);
 
-    public void removeGroupPermissions(int groupId, ResponseRunnable response);
+    public ListenableFuture<Response> removeGroupPermissions(int groupId);
 
-    public void addGroupParent(int groupId, int parentGroupId, ResponseRunnable response);
+    public ListenableFuture<Response> addGroupParent(int groupId, int parentGroupId);
 
-    public void removeGroupParent(int groupId, int parentGroupId, ResponseRunnable response);
+    public ListenableFuture<Response> removeGroupParent(int groupId, int parentGroupId);
 
-    public void setGroupPrefix(int groupId, String prefix, ResponseRunnable response);
+    public ListenableFuture<Response> setGroupPrefix(int groupId, String prefix);
 
-    public void setGroupPrefix(int groupId, String prefix, String server, ResponseRunnable response);
+    public ListenableFuture<Response> setGroupPrefix(int groupId, String prefix, String server);
 
-    public void setGroupSuffix(int groupId, String suffix, ResponseRunnable response);
+    public ListenableFuture<Response> setGroupSuffix(int groupId, String suffix);
 
-    public void setGroupSuffix(int groupId, String suffix, String server, ResponseRunnable response);
+    public ListenableFuture<Response> setGroupSuffix(int groupId, String suffix, String server);
 
-    public void setGroupLadder(int groupId, String ladder, ResponseRunnable response);
+    public ListenableFuture<Response> setGroupLadder(int groupId, String ladder);
 
-    public void setGroupRank(int groupId, int rank, ResponseRunnable response);
-    
-    public void setGroupName(int groupId, String name, ResponseRunnable response);
+    public ListenableFuture<Response> setGroupRank(int groupId, int rank);
+
+    public ListenableFuture<Response> setGroupName(int groupId, String name);
 
 }

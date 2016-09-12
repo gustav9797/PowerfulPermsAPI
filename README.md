@@ -21,34 +21,38 @@ This API works on both BungeeCord and Spigot.
 
 Example of how to use:
 ```java
-PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");
+final PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");
 PermissionManager permissionManager = plugin.getPermissionManager();
 
 // Add permission to player
 // Both UUID and name is required because that's how the table is.
-permissionManager.addPlayerPermission(uuid, playerName, "some.permission", new ResponseRunnable() {
+final ListenableFuture<Response> future = permissionManager.addPlayerPermission(uuid, playerName, "some.permission");
+future.addListener(new Runnable() {
 
     @Override
     public void run() {
-        // This function is run synchronously when the action is finished.
+        // This function is run synchronously when the action is finished. You can also change the executor so that it executes in the thread you want.
         // There is a boolean to tell you if the action succeeded or not, there is also a string response.
-        boolean result = success;
+        boolean result = future.get().succeeded();
         if (!result)
-            Bukkit.getLogger().log(Level.SEVERE, "Could not add player permission. " + response);
+            plugin.getLogger().severe("Could not add player permission. " + future.get().getResponse());
     }
-});
+
+}, MoreExecutors.sameThreadExecutor());
 
 // Get prefix of an online/offline player.
 // This time you will use a ResultRunnable with template for the returned data.
-permissionManager.getPlayerPrefix(uuid, new ResultRunnable<String>() {
+final ListenableFuture<String> future = permissionManager.getPlayerPrefix(uuid);
+future.addListener(new Runnable() {
 
     @Override
     public void run() {
         // This function is run synchronously when the action is finished.
         // The prefix is in the variable called "result"
-        String prefix = result;
+        String prefix = future.get();
     }
-});
+
+}, MoreExecutors.sameThreadExecutor());
 
 // Get an online player.
 // Will be null if the player isn't online.
@@ -62,5 +66,5 @@ String staffPrefix = permissionPlayer.getPrefix("staff");
 String prefix = permissionPlayer.getPrefix();
 
 // Get the player's own prefix.
-String ownPrefix = permissionPlayer.getOwnPrefix();     
+String ownPrefix = permissionPlayer.getOwnPrefix();    
 ```

@@ -24,9 +24,8 @@ Example of how to use:
 final PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");
 PermissionManager permissionManager = plugin.getPermissionManager();
 
-// Add permission to player
-// Both UUID and name is required because that's how the table is.
-final ListenableFuture<Response> future = permissionManager.addPlayerPermission(uuid, playerName, "some.permission");
+// Add permission to player. There are more optional parameters such as server, world and expiry date.
+final ListenableFuture<Response> future = permissionManager.addPlayerPermission(uuid, "some.permission");
 future.addListener(new Runnable() {
 
     @Override

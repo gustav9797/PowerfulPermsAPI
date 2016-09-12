@@ -2,7 +2,7 @@
 API for Spigot plugin PowerfulPerms.
 This API works on both BungeeCord and Spigot.
 
-~~
+```xml
 <repositories>
 	<repository>
 		<id>alskebo-repo</id>
@@ -17,7 +17,7 @@ This API works on both BungeeCord and Spigot.
 		<version>X.X.X</version>
 	</dependency>
 </dependencies>
-~~
+```
 Not currently avaliable due to server failure.
 
 Example of how to use:

@@ -20,6 +20,8 @@ This API works on both BungeeCord and Spigot.
 ```
 Not currently avaliable due to server failure.
 
+
+
 Example of how to use:
 ```java
 final PowerfulPermsPlugin plugin = (PowerfulPermsPlugin) Bukkit.getPluginManager().getPlugin("PowerfulPerms");

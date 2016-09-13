@@ -22,8 +22,8 @@ public interface PermissionPlayer {
     public boolean isPermissionSet(String permission);
     
     public Group getGroup(String ladder);
-    
-    public Group getGroup();
+        
+    public Group getPrimaryGroup();
     
     public String getPrefix(String ladder);
     

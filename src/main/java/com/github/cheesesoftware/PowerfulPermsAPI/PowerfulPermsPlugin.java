@@ -1,5 +1,6 @@
 package com.github.cheesesoftware.PowerfulPermsAPI;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -24,6 +25,10 @@ public interface PowerfulPermsPlugin {
     public UUID getPlayerUUID(String name);
     
     public String getPlayerName(UUID uuid);
+    
+    public Map<UUID, String> getOnlinePlayers();
+    
+    public void sendPlayerMessage(String name, String message);
     
     public void debug(String message);
     

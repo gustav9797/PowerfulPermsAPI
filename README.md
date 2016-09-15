@@ -33,7 +33,7 @@ future.addListener(new Runnable() {
 
     @Override
     public void run() {
-        // This function is run synchronously when the action is finished. You can also change the executor so that it executes in the thread you want.
+        // This function is run when the action is finished. You can also change the executor so that it executes in the thread you want.
         // There is a boolean to tell you if the action succeeded or not, there is also a string response.
         boolean result = future.get().succeeded();
         if (!result)
@@ -49,7 +49,7 @@ future.addListener(new Runnable() {
 
     @Override
     public void run() {
-        // This function is run synchronously when the action is finished.
+        // This function is run when the action is finished.
         // The prefix is in the variable called "result"
         String prefix = future.get();
     }

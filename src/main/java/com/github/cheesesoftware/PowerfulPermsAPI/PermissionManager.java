@@ -10,15 +10,22 @@ import java.util.concurrent.ExecutorService;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import redis.clients.jedis.Jedis;
+
 public interface PermissionManager {
 
     // TODO: replace "with specified name"
 
     /*
+     * Returns the Redis connection.
+     */
+    public Jedis getRedisConnection();
+
+    /*
      * Returns the executor service.
      */
     public ExecutorService getExecutor();
-    
+
     /*
      * Returns the event handler.
      */

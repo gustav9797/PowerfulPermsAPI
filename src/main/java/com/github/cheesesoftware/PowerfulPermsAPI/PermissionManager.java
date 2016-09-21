@@ -107,6 +107,11 @@ public interface PermissionManager {
     public ListenableFuture<LinkedHashMap<String, List<CachedGroup>>> getPlayerCurrentGroups(UUID uuid);
 
     /**
+     * Retrieves the group with highest rank value of the player.
+     */
+    public ListenableFuture<Group> getPlayerPrimaryGroup(UUID uuid);
+
+    /**
      * Checks if player uses groups from player [default].
      */
     public ListenableFuture<Boolean> isPlayerDefault(UUID uuid);

@@ -122,6 +122,11 @@ public interface PermissionManager {
     public ListenableFuture<List<Permission>> getPlayerOwnPermissions(UUID uuid);
 
     /**
+     * Offline permission check.
+     */
+    public ListenableFuture<Boolean> playerHasPermission(UUID uuid, String permission, String world, String server);
+
+    /**
      * Retrieves the prefix of the player with the specified name.
      */
     public ListenableFuture<String> getPlayerPrefix(UUID uuid, String ladder);

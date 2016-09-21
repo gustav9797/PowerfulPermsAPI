@@ -122,12 +122,22 @@ public interface PermissionManager {
     public ListenableFuture<List<Permission>> getPlayerOwnPermissions(UUID uuid);
 
     /**
-     * Retrieves the prefix of the player with the specified name. If the player is not online it retrieves player own prefix.
+     * Retrieves the prefix of the player with the specified name.
+     */
+    public ListenableFuture<String> getPlayerPrefix(UUID uuid, String ladder);
+
+    /**
+     * Retrieves the prefix of the player with the specified name.
      */
     public ListenableFuture<String> getPlayerPrefix(UUID uuid);
 
     /**
-     * Retrieves the suffix of the player with the specified name. If the player is not online it retrieves player own suffix.
+     * Retrieves the suffix of the player with the specified name.
+     */
+    public ListenableFuture<String> getPlayerSuffix(UUID uuid, String ladder);
+
+    /**
+     * Retrieves the suffix of the player with the specified name.
      */
     public ListenableFuture<String> getPlayerSuffix(UUID uuid);
 

@@ -1,26 +1,25 @@
 # PowerfulPerms API
+[![Release](https://jitpack.io/v/CheeseSoftware/PowerfulPermsAPI.svg)](https://jitpack.io/#CheeseSoftware/PowerfulPermsAPI)
+
 API for Spigot plugin PowerfulPerms.
 This API works on both BungeeCord and Spigot.
 
 ```xml
 <repositories>
 	<repository>
-		<id>alskebo-repo</id>
-		<url>http://repo.alskebo.com/repository/maven-releases</url>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
 	</repository>
 </repositories>
 
 <dependencies>
 	<dependency>
-		<groupId>com.github.cheesesoftware</groupId>
+		<groupId>com.github.CheeseSoftware</groupId>
 		<artifactId>PowerfulPermsAPI</artifactId>
-		<version>X.X.X</version>
+		<version>1.2.0</version>
 	</dependency>
 </dependencies>
 ```
-Not currently avaliable due to server failure.
-
-
 
 Example of how to use:
 ```java

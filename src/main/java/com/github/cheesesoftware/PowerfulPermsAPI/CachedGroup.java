@@ -47,19 +47,4 @@ public class CachedGroup {
     public void setExpireTaskId(int taskId) {
         this.expireTaskId = taskId;
     }
-
-    public static boolean isSimilar(CachedGroup group, int groupId, boolean negated, Date expires) {
-        if (group == null)
-            return false;
-        if (group.getGroupId() == groupId) {
-            if (group.isNegated() == negated) {
-                if (group.getExpirationDate() == null && expires == null)
-                    return true;
-                else if (group.getExpirationDate() == null || expires == null)
-                    return false;
-                return group.getExpirationDate().equals(expires);
-            }
-        }
-        return false;
-    }
 }

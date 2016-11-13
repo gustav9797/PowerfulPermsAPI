@@ -17,6 +17,7 @@ This API works on both BungeeCord and Spigot.
 		<groupId>com.github.CheeseSoftware</groupId>
 		<artifactId>PowerfulPermsAPI</artifactId>
 		<version>1.3.0</version>
+		<scope>provided</scope>
 	</dependency>
 </dependencies>
 ```

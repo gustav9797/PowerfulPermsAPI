@@ -227,6 +227,8 @@ public interface PermissionManager {
 
     public ListenableFuture<Response> demotePlayer(UUID uuid, String ladder);
 
+    public ListenableFuture<Response> deletePlayer(UUID uuid);
+
     public ListenableFuture<Response> createGroup(String name, String ladder, int rank);
 
     public ListenableFuture<Response> deleteGroup(int groupId);

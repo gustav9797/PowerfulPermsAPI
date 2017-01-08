@@ -63,3 +63,4 @@ $RECYCLE.BIN/
 *.lnk
 target/surefire-reports/TEST-com.github.cheesesoftware.PowerfulPermsAPI.AppTest.xml
 /target/
+target/surefire-reports/com.github.cheesesoftware.PowerfulPermsAPI.AppTest.txt

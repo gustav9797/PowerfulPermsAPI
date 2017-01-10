@@ -37,4 +37,6 @@ public interface PowerfulPermsPlugin {
     public String getVersion();
 
     public void loadConfig();
+    
+    public boolean isBungeeCord();
 }
